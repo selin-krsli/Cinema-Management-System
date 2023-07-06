@@ -1,0 +1,23 @@
+﻿@model Movie
+<div class="card bg-light mb-3" style="max-width:18rem";>
+    <img src="~/movie_img/@Model.ImageUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.MovieName</h5>
+        <p class="card-text">@Model.Director</p>
+        <small class="text-muted">
+           @Model.Genre
+        </small>
+        <div class="card-footer text-center">
+            <a asp-controller="Movie" asp-action="Details" asp-route-url="@Model.Url" class="btn btn-primary btn-sm">Details</a>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="BookingCart" asp-action="BookingNow" method="post" style="display:inline;">
+                    <input type="hidden" name="movieId" value="@Model.MovieId">  
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn-primary btn-primary btn-sm">Booking Now</button>
+                </form>
+            }
+            @*<a asp-controller="Movie" asp-action="BookingNow" asp-route-id="@Model.MovieId" class="btn btn-primary btn-sm">Booking-Now</a>*@
+        </div>     
+    </div>
+</div>

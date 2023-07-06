@@ -1,0 +1,105 @@
+﻿@model CategoryModel
+
+<h3>Edit Category</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-controller="Admin" asp-action="CategoryEdit" method="post">
+            <div class="form-group row">
+                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Url" class="col-sm-2 col-form-label">Url</label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                </div>
+            </div>
+            <div id="movies">
+                @for (int i = 0; i < Model.Movies.Count; i++)
+                {
+                    <input type="hidden" name="Movies[@i].MovieId" value="@Model.Movies[@i].MovieId">
+                    <input type="hidden" name="Movies[@i].MovieName" value="@Model.Movies[@i].MovieName">
+                    <input type="hidden" name="Movies[@i].ImageUrl" value="@Model.Movies[@i].ImageUrl">
+                    <input type="hidden" name="Movies[@i].Genre" value="@Model.Movies[@i].Genre">
+                    <input type="hidden" name="Movies[@i].MovieStory" value="@Model.Movies[@i].MovieStory">
+                    <input type="hidden" name="Movies[@i].Director" value="@Model.Movies[@i].Director">
+                    <input type="hidden" name="Movies[@i].IsApproved" value="@Model.Movies[@i].IsApproved.ToString()">
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <td>Id</td>
+                            <td>Name</td>
+                            <td>Image</td>
+                            <td>Genre</td>
+                            <td>Story</td>
+                            <td>Director</td>
+                            <td>Approved</td>
+                            <td style="width: 150px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Movies.Count > 0)
+                        {
+                            @foreach (var item in Model.Movies)
+                            {
+                                <tr>
+                                    <td>@item.MovieId</td>
+                                    <td>@item.MovieName</td>
+                                    <td><img src="~/movie_img/@item.ImageUrl" width="80" /></td>
+                                    <td>@item.Genre</td>
+                                    <td>@item.MovieStory</td>
+                                    <td>@item.Director</td>
+                                    <td>
+                                        @if (item.IsApproved)
+                                        {
+                                            <i class="fas fa-check-circle"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-times-circle"></i>
+
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/admin/movies/@item.MovieId" class="btn btn-primary btn-sm mr-2">Edit</a>
+                                        <form action="/admin/deletemovie/@item.MovieId" method="post" style="display:inline;">
+                                            <input type="hidden" name="movieId" value="@item.MovieId">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                There is not any movies!
+                            </div>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

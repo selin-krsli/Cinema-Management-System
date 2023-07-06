@@ -1,0 +1,46 @@
+﻿@using CinemaManagementSystem.ENTITY
+@model Movie
+
+<form  method="post">
+
+    <div class="form-group">
+        <label for="Name">Movie Name</label>
+        <input asp-for="MovieName" value="@Model.MovieName" class="form-control">
+        <span asp-validation-for="MovieName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Director">Director</label>
+        <input asp-for="Director" value="@Model.Director" class="form-control">
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="ReleaseYear">ReleaseYear</label>
+        <input asp-for="ReleaseYear" value="@Model.ReleaseYear" class="form-control">
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Genre">Genre</label>
+        <input asp-for="Genre" value="@Model.Genre" class="form-control">
+        <span asp-validation-for="Genre" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">ImageUrl</label>
+        <input asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control">
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="MovieStory">MovieStory</label>
+        <textarea asp-for="MovieStory" class="form-control"></textarea>
+        <span asp-validation-for="MovieStory" class="text-danger"></span>
+
+    </div>
+@*    <div class="form-group">
+        <label for="CategoryId">CategoryId</label>
+        <select asp-for="Movie.CategoryId" asp-items="@ViewBag.Categories" class="form-control">
+            <option selected disabled>Choose...</option>
+            <span asp-validation-for="Movie.CategoryId" class="text-danger"></span>
+        </select>
+    </div>*@
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

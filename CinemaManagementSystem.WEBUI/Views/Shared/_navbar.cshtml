@@ -1,0 +1,73 @@
+﻿
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" asp-controller="home" asp-action="index">
+        <img src="~/movie_img/movielogo.png" width="30" height="30" class="d-inline-block align-top" />
+        Peach Movie
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" asp-controller="home" asp-action="index">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/movie/list">All Movies <span class="sr-only">(current)</span></a>
+            </li>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" href="/BookingCart/Index">BookingCart<span class="sr-only">(current)</span></a>
+                </li>
+@*                <li class="nav-item active">
+                    <a class="nav-link" href="/BookingCart/GetOrders">Orders <span class="sr-only">(current)</span></a>
+                </li>*@
+                @*if(User.IsInRole("admin"))*@
+                if (User.Identity.Name=="admin")
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Admin/Movielist">Admin Movies <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Admin/CategoryList">Admin Categories <span class="sr-only">(current)</span></a>
+                    </li>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="/Admin/RoleList">Roles <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Admin/UserList">Users <span class="sr-only">(current)</span></a>
+                    </li>
+@*                    <li class="nav-item active">
+                        <a class="nav-link" href="/BookingCart/GetOrders">Orders <span class="sr-only">(current)</span></a>
+                    </li>*@
+                }
+
+            }
+            
+        </ul>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a href="/Account/Manage" class="nav-link"> <span class="sr-only">(current)</span>
+                        @User.Identity.Name
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/Account/Logout" class="nav-link">Logout <span class="sr-only">(current)</span></a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item active">
+                    <a href="/Account/Login" class="nav-link">Login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/Account/Register" class="nav-link">Register<span class="sr-only">(current)</span></a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>
